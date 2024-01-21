@@ -13,5 +13,10 @@ def run_app():
 def main_loop():
     output_menu_com()
     while True:
-        input_com()
+        com = get_com()
+        if not check_com(com, 'main'):
+            output_error_mess()
+            print('false')
+            continue
+        print('true')
 

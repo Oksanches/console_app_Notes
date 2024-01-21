@@ -16,6 +16,27 @@ def output_menu_com(type: str = 'main'):
     print_menu(lst)
 
 
-def get_com():
+def check_com(com: str, type: str) -> bool:
+    """
+    принимает команду и тип меню, возвращает  тру, если команда есть в соответсвующем меню
+    :param com: str
+    :param type: str
+    :return: bool
+    """
+    com = com.lower().replace(' ','')
+    lst = config.diction.get(type)
+    if com in lst: return True
+    return False
+
+
+def output_error_mess():
     pass
+
+
+    
+
+
+def get_com():
+    return input_com()
+
 
