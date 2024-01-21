@@ -1,8 +1,12 @@
+from modol import *
+import config
+
+
 def run_app():
-    load()
+    config.load()
     start_message()
     main_loop()
-    save()
+    config.save()
     ending_message()
 
 
