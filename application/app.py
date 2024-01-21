@@ -1,4 +1,4 @@
-from modol import *
+from application.modol import *
 import config
 
 
@@ -11,4 +11,7 @@ def run_app():
 
 
 def main_loop():
-    pass
+    output_menu_com()
+    while True:
+        input_com()
+
