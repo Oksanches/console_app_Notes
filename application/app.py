@@ -1,12 +1,12 @@
 from application.modol import *
-import config
+from config import load, save
 
 
 def run_app():
-    config.load()
+    load()
     start_message()
     main_loop()
-    config.save()
+    save()
     ending_message()
 
 
