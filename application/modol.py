@@ -18,10 +18,11 @@ def output_menu_com(type: str = 'main') -> None:
     :return:
     """
     lst = config.diction_menu.get(type)
+    menu = []
     for i in range(len(lst)):
         discript = config.diction_com.get(lst[i])
-        lst[i] = lst[i] + ' - ' + discript
-    print_menu(lst)
+        menu.append(lst[i] + ' - ' + discript)
+    print_menu(menu)
 
 
 def output_error_mess():
