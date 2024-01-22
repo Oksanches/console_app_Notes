@@ -11,9 +11,38 @@ def ending_message():
     pass
 
 
-def output_menu_com(type: str = 'main'):
-    lst = config.diction.get(type)
+def output_menu_com(type: str = 'main') -> None:
+    """
+
+    :param type:
+    :return:
+    """
+    lst = config.diction_menu.get(type)
+    for i in range(len(lst)):
+        discript = config.diction_com.get(lst[i])
+        lst[i] = lst[i] + ' - ' + discript
     print_menu(lst)
+
+
+def output_error_mess():
+    pass
+
+
+def output_result(result):
+    pass
+
+
+def get_com():
+    return input_com()
+
+
+def pars_com(com: str) -> str:
+    """
+    Приводит к нижнему регистру строку и убирает пробелы
+    :param com: string
+    :return: string
+    """
+    return com.lower().replace(' ', '')
 
 
 def check_com(com: str, type: str) -> bool:
@@ -23,20 +52,6 @@ def check_com(com: str, type: str) -> bool:
     :param type: str
     :return: bool
     """
-    com = com.lower().replace(' ','')
-    lst = config.diction.get(type)
-    if com in lst: return True
-    return False
-
-
-def output_error_mess():
-    pass
-
-
-    
-
-
-def get_com():
-    return input_com()
-
+    lst = config.diction_menu.get(type)
+    return True if com in lst else False
 
