@@ -14,6 +14,7 @@ def main_loop():
     output_menu_com()
     while True:
         com = pars_com(get_com())
+        if com == 'stop': return
         if not check_com(com, 'main'):
             output_error_mess()
             continue
