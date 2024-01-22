@@ -55,3 +55,25 @@ def check_com(com: str, type: str) -> bool:
     lst = config.diction_menu.get(type)
     return True if com in lst else False
 
+
+def run_command(com):
+    match com:
+        case 'add':
+            pass
+        case 'search':
+            pass
+        case 'view':
+            pass
+        case 'del':
+            pass
+        case 'edit':
+            pass
+        case 'convert':
+            pass
+        case 'sort':
+            pass
+        case '':
+            pass
+        case 'stop':
+            pass
+

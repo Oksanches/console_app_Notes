@@ -17,5 +17,6 @@ def main_loop():
         if not check_com(com, 'main'):
             output_error_mess()
             continue
-
+        result = run_command(com)
+        output_result(result)
 
