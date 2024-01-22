@@ -59,7 +59,8 @@ def check_com(com: str, type: str) -> bool:
 def run_command(com):
     match com:
         case 'add':
-            pass
+            data = take_data(["Введите имя заметки", "Введите содержание"])
+            print(data)
         case 'search':
             pass
         case 'view':
@@ -77,3 +78,9 @@ def run_command(com):
         case 'stop':
             pass
 
+
+def take_data(lst: list) -> list:
+    data = []
+    for i in lst:
+        data.append(input_data(i))
+    return data
