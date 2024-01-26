@@ -62,7 +62,9 @@ def run_command(com):
     match com:
         case 'add':
             data = take_data(["Введите имя заметки", "Введите содержание"])
-            print(data)
+            data.append(set_priority())
+            result = create_notes(data)
+
         case 'search':
             pass
         case 'view':
@@ -86,3 +88,7 @@ def take_data(lst: list) -> list:
     for i in lst:
         data.append(input_data(i))
     return data
+
+
+def set_priority():
+    pass

@@ -3,7 +3,6 @@ import os
 
 def load():
     global path
-    path = create_path()
     read_file()
 
 
@@ -27,6 +26,7 @@ def create_path() -> str:
 
 
 def read_file():
+    global path
     file = open(path, 'r')
     data = file.read()
     file.close()
@@ -37,10 +37,14 @@ def save():
     pass
 
 
-path = None
+container_notes = []
+
+
+path = create_path()
 
 
 diction_menu = {'main': ['add', 'search', 'view', 'del', 'edit', 'convert', 'sort']}
+
 
 diction_com = {'add': 'Создать заметку',
                'search': 'Найти заметку',
