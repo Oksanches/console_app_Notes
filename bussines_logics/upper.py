@@ -9,3 +9,4 @@ def create_notes(data):
     data.append(f'{current_time[11:16:]} {date[8:]}.{date[5:7]}.{date[:4]}')
     container_notes.append(data)
     save()
+    return f'Заметка {data[0]} успешно создана'

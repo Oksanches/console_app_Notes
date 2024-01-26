@@ -2,8 +2,25 @@ import os
 
 
 def load():
-    global path
-    read_file()
+    data = read_file()
+    data = '\n'.split(data)
+    for i in data:
+        notes = '&'.split(i)
+        container_notes.append(notes)
+
+
+def save():
+    write_data = []
+    for i in container_notes:
+        notes = '&'.join(i)
+        write_data.append(notes)
+    write_data = '\n'.join(write_data)
+    with open(path, 'w') as file: file.write(write_data)
+
+
+def read_file():
+    with open(path, 'r') as file:
+        return file.read()
 
 
 def create_path() -> str:
@@ -25,25 +42,14 @@ def create_path() -> str:
     return path
 
 
-def read_file():
-    global path
-    file = open(path, 'r')
-    data = file.read()
-    file.close()
-    print(data)
-
-
-def save():
-    pass
-
-
 container_notes = []
 
 
 path = create_path()
 
 
-diction_menu = {'main': ['add', 'search', 'view', 'del', 'edit', 'convert', 'sort']}
+diction_menu = {'main': ['add', 'search', 'view', 'del', 'edit', 'convert', 'sort'],
+                'prior': ['1', '2', 'undo']}
 
 
 diction_com = {'add': 'Создать заметку',
@@ -56,6 +62,9 @@ diction_com = {'add': 'Создать заметку',
                'y': '',
                'n': '',
                'info': '',
-               'stop': ''}
+               'stop': '',
+               '1': 'Обычная заметка',
+               '2': 'Важная заметка',
+               'undo': 'Отменить команду'}
 
 
