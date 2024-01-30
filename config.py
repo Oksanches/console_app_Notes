@@ -48,17 +48,17 @@ container_notes = []
 path = create_path()
 
 
-diction_menu = {'main': ['add', 'search', 'view', 'del', 'edit', 'convert', 'sort'],
+diction_menu = {'main': ['add', 'view', 'open', 'del', 'edit', 'search', 'convert'],
                 'prior': ['1', '2', 'undo']}
 
 
 diction_com = {'add': 'Создать заметку',
+               'open': 'Просмотреть заметку',
                'search': 'Найти заметку',
-               'view': 'Просмотр всех заметок',
+               'view': 'Вывести имена заметок',
                'edit': 'Редактировать заметку',
                'del': 'Удалить заметку',
-               'convert': 'Конвертировать',
-               'sort': 'Отсортировать по критерию',
+               'convert': 'Конвертировать в CSV',
                'y': '',
                'n': '',
                'info': '',

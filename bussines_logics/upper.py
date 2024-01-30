@@ -17,3 +17,21 @@ def take_name_notes():
     for i in range(len(container_notes)):
         view_data.append(f'{i+1}. {container_notes[i][0]}')
     return view_data
+
+
+def search_notes(key):
+    for i in container_notes:
+        if key == i[0]:
+            return i
+    return [False]
+
+
+def format_notes(notes):
+    red = '\033[31m'
+    clean = '\033[0m'
+    return (f"\t{red if notes[2] == 'Важная' else clean}Имя заметки: {notes[0]}{clean}"
+            f"\n\tСодержание: {notes[1]}\n\tДата создания: {notes[3]}")
+
+
+def check_duplicate(target):
+    return False

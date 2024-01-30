@@ -26,8 +26,8 @@ def output_menu_com(type: str = 'main') -> None:
     print_menu(menu)
 
 
-def output_info_mess():
-    pass
+def output_info_mess(mess):
+    print_info_mess(mess)
 
 
 def output_error_mess():
@@ -65,12 +65,25 @@ def check_com(com: str, type: str) -> bool:
 def run_command(com):
     match com:
         case 'add':
-            data = take_data(["Введите имя заметки", "Введите содержание"])
-            if data[0] == 'undo':
+            data = []
+            while not data:
+                name_notes = take_data("Введите имя заметки")
+                if name_notes == 'undo':
+                    output_error_mess()
+                    return 'undo'
+                elif name_notes == 'stop':
+                    return 'stop'
+                elif check_duplicate(name_notes):
+                    output_error_mess()
+                    continue
+                data.append(name_notes)
+            descript = take_data("Введите содержание")
+            if descript == 'undo':
                 output_error_mess()
                 return 'undo'
-            elif data[0] == 'stop':
+            elif descript == 'stop':
                 return 'stop'
+            data.append(descript)
             buff = set_priority()
             if buff == 'undo':
                 output_error_mess()
@@ -79,6 +92,14 @@ def run_command(com):
                 return 'stop'
             data.append(buff)
             return create_notes(data)
+
+        case 'open':
+            name_notes = take_data('Введите имя заметки')
+            result = search_notes(name_notes)
+            if not result[0]:
+                output_error_mess()
+                return 'None'
+            return format_notes(result)
 
         case 'search':
             pass
@@ -101,26 +122,22 @@ def run_command(com):
             pass
 
 
-def take_data(lst: list) -> list:
-    data = []
-    count = 0
-    while count != len(lst):
-        buff = input_data(lst[count])
-        if buff == 'undo':
-            return ['undo']
-        elif buff == 'stop':
-            return ['stop']
+def take_data(target) -> str:
+    while True:
+        result = input_data(target)
+        if result == 'undo':
+            return 'undo'
+        elif result == 'stop':
+            return 'stop'
 
-        if '&' in buff:
+        if '&' in result:
             output_error_mess()
             continue
-        data.append(buff)
-        count += 1
-    return data
+        return result
 
 
 def set_priority():
-    output_info_mess()
+    output_info_mess('Выберите приоритетность для вашей заметки:')
     while True:
         output_menu_com('prior')
         com = input_com()
