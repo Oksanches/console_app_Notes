@@ -14,10 +14,17 @@ def main_loop():
     output_menu_com()
     while True:
         com = pars_com(get_com())
+
         if com == 'stop': return
         if not check_com(com, 'main'):
             output_error_mess()
             continue
-        result = run_command(com)
-        output_result(result)
 
+        result = run_command(com)
+
+        if result == 'undo':
+            output_error_mess()
+            continue
+        elif result == 'stop': return
+        elif result == 'None': continue
+        output_result(result)

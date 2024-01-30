@@ -35,7 +35,7 @@ def output_error_mess():
 
 
 def output_result(result):
-    pass
+    print_info_mess(result)
 
 
 def get_com():
@@ -75,26 +75,29 @@ def run_command(com):
             if buff == 'undo':
                 output_error_mess()
                 return 'undo'
-            elif data[0] == 'stop':
+            elif buff == 'stop':
                 return 'stop'
             data.append(buff)
-            result = create_notes(data)
+            return create_notes(data)
 
         case 'search':
             pass
+
         case 'view':
-            print(config.container_notes)
+            view_data = take_name_notes()
+            print_menu(view_data)
+            return 'None'
+
         case 'del':
             pass
+
         case 'edit':
             pass
+
         case 'convert':
             pass
+
         case 'sort':
-            pass
-        case '':
-            pass
-        case 'stop':
             pass
 
 
@@ -127,5 +130,7 @@ def set_priority():
             return 'Важная'
         elif com == 'undo':
             return 'undo'
+        elif com == 'stop':
+            return 'stop'
         else:
             output_error_mess()

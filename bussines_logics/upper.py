@@ -10,3 +10,10 @@ def create_notes(data):
     container_notes.append(data)
     save()
     return f'Заметка {data[0]} успешно создана'
+
+
+def take_name_notes():
+    view_data = []
+    for i in range(len(container_notes)):
+        view_data.append(f'{i+1}. {container_notes[i][0]}')
+    return view_data
