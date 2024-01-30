@@ -3,9 +3,9 @@ import os
 
 def load():
     data = read_file()
-    data = '\n'.split(data)
+    data = data.split('\n')
     for i in data:
-        notes = '&'.split(i)
+        notes = i.split('&')
         container_notes.append(notes)
 
 
@@ -19,7 +19,7 @@ def save():
 
 
 def read_file():
-    with open(path, 'r') as file:
+    with (open(path, 'r') as file):
         return file.read()
 
 
