@@ -2,6 +2,8 @@ from bussines_logics.lower import *
 from datetime import datetime as dt
 from config import container_notes, save
 
+red = '\033[31m'
+clean = '\033[0m'
 
 def create_notes(data):
     current_time = f'{dt.now()}'
@@ -15,7 +17,7 @@ def create_notes(data):
 def take_name_notes():
     view_data = []
     for i in range(len(container_notes)):
-        view_data.append(f'{i+1}. {container_notes[i][0]}')
+        view_data.append(f'{i+1}. {red if container_notes[i][2]=="Важная" else clean}{container_notes[i][0]}{clean}')
     return view_data
 
 
@@ -27,8 +29,6 @@ def search_notes(key):
 
 
 def format_notes(notes):
-    red = '\033[31m'
-    clean = '\033[0m'
     return (f"\t{red if notes[2] == 'Важная' else clean}Имя заметки: {notes[0]}{clean}"
             f"\n\tСодержание: {notes[1]}\n\tДата создания: {notes[3]}")
 
