@@ -9,7 +9,7 @@ def start_message():
 
 
 def ending_message():
-    pass
+    exit_mess()
 
 
 def output_menu_com(type_menu: str = 'main') -> None:
@@ -30,8 +30,8 @@ def output_info_mess(mess):
     print_info_mess(mess)
 
 
-def output_error_mess():
-    pass
+def output_error_mess(message):
+    print_error_mess(message)
 
 
 def output_result(result):
@@ -69,47 +69,63 @@ def run_command(com):
             while not data:
                 name_notes = take_data("Введите имя заметки")
                 if name_notes == 'undo':
-                    output_error_mess()
+                    output_error_mess('Действие отменено пользователем')
                     return 'undo'
                 elif name_notes == 'stop':
                     return 'stop'
                 elif check_duplicate(name_notes):
-                    output_error_mess()
+                    output_error_mess("Заметка с таким именем уже сущевствует\n\t\tПовторите ввод")
                     continue
                 data.append(name_notes)
             descript = take_data("Введите содержание")
             if descript == 'undo':
-                output_error_mess()
+                output_error_mess('Действие отменено пользователем')
                 return 'undo'
             elif descript == 'stop':
                 return 'stop'
             data.append(descript)
             buff = set_priority()
             if buff == 'undo':
-                output_error_mess()
+                output_error_mess('Действие отменено пользователем')
                 return 'undo'
             elif buff == 'stop':
                 return 'stop'
             data.append(buff)
             return create_notes(data)
 
-
         case 'open':
             name_notes = take_data('Введите имя заметки')
             if name_notes == 'undo':
-                output_error_mess()
+                output_error_mess('Действие отменено пользователем')
                 return 'undo'
             elif name_notes == 'stop':
                 return 'stop'
 
             notes = search_notes(name_notes)
             if not notes[0]:
-                output_error_mess()
+                output_error_mess('Такая с таким именем не найдена, действие отменено.')
                 return 'None'
             return format_notes(notes)
 
         case 'search':
-            pass
+            target = take_data('Введите часть имени заметки')
+            if target == 'undo':
+                output_error_mess('Действие отменено пользователем')
+                return 'undo'
+            elif target == 'stop':
+                return 'stop'
+
+            notes_container = search_for_name(target)
+
+            if not notes_container:
+                output_error_mess("Не найдено совпадений...")
+                return "None"
+
+            container = take_name_notes(notes_container)
+
+            print_menu(container)
+
+            return 'None'
 
         case 'view':
             view_data = take_name_notes()
@@ -119,38 +135,56 @@ def run_command(com):
         case 'del':
             name_notes = take_data('Введите имя заметки')
             if name_notes == 'undo':
-                output_error_mess()
+                output_error_mess('Действие отменено пользователем')
                 return 'undo'
             elif name_notes == 'stop':
                 return 'stop'
 
             notes = search_notes(name_notes)
             if not notes[0]:
-                output_error_mess()
+                output_error_mess("Заметка с таким именем не найдена.")
                 return 'None'
             return del_notes(notes)
 
         case 'edit':
             name_notes = take_data('Введите имя заметки')
             if name_notes == 'undo':
-                output_error_mess()
+                output_error_mess('Действие отменено пользователем')
                 return 'undo'
             elif name_notes == 'stop':
                 return 'stop'
 
             notes = search_notes(name_notes)
             if not notes[0]:
-                output_error_mess()
+                output_error_mess("Заметка с таким именем не найдена.")
                 return 'None'
 
-            #Что изменить и на что изменить
-            #вывести в виде меню что изменить и на что изменить, получить команду/результат и обработать
-            #вывести сообщение
+            output_menu_com('edit')
 
-            return edit_notes(notes)
+            atribut_notes = None
+            while atribut_notes == None:
+                atribut = take_data('Какую часть Вы хотите изменить?')
+                if atribut == 'undo':
+                    output_error_mess('Действие отменено пользователем')
+                    return 'undo'
+                elif atribut == 'stop':
+                    return 'stop'
+                atribut_notes = atribut if atribut in ['name', 'disc', 'prior'] else output_error_mess()
+
+            if atribut_notes == 'prior':
+                new_data_atribut = set_priority()
+            else:
+                new_data_atribut = take_data('Введите новое значение')
+                if new_data_atribut == 'undo':
+                    output_error_mess('Действие отменено пользователем')
+                    return 'undo'
+                elif new_data_atribut == 'stop':
+                    return 'stop'
+
+            return edit_notes(notes, atribut_notes, new_data_atribut)
 
         case 'convert':
-            pass
+            return convert_data('\\notes.csv')
 
 
 def take_data(target) -> str:
@@ -162,7 +196,7 @@ def take_data(target) -> str:
             return 'stop'
 
         if '&' in result:
-            output_error_mess()
+            output_error_mess('Нельзя использовать символ "&"')
             continue
         return result
 
@@ -181,4 +215,4 @@ def set_priority():
         elif com == 'stop':
             return 'stop'
         else:
-            output_error_mess()
+            output_error_mess("Не верный ввод, выберите цифру из меню:")

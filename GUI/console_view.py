@@ -1,20 +1,31 @@
+from GUI.system_messege import *
+
+
 def greeting_mess():
-    print('Приложение Notes запущено! Добро пожаловать:)')
+    print(f'{main_message()}Приложение Notes запущено! Добро пожаловать:){clear()}\n')
+
+
+def exit_mess():
+    input(f'{main_message()}Завершение работы. Нажмите Enter для закрытия консоли{clear()}')
 
 
 def print_info_mess(mess):
-    print(mess)
+    print(f"{dec_info()}{mess}")
+
+
+def print_error_mess(mess: str):
+    print(f"{dec_error()}{mess}")
 
 
 def print_menu(lst):
     for i in lst:
-        print(f'\t{i}')
+        print(f'\t\t\t{i}')
 
 
 def input_com():
-    return input('->')
+    return input(f"{dec_input()}")
 
 
 def input_data(mess: str):
-    print(mess)
-    return input('>>')
+    print(f'{dec_info()}{mess}')
+    return input(f'{dec_input()}')

@@ -11,6 +11,7 @@ def run_app():
 
 
 def main_loop():
+    output_info_mess('Список доступных команд:')
     output_menu_com()
     while True:
         com = pars_com(get_com())
@@ -23,13 +24,12 @@ def main_loop():
             continue
 
         if not check_com(com, 'main'):
-            output_error_mess()
+            output_error_mess('Такая команда не определена, повторите ввод')
             continue
 
         result = run_command(com)
 
         if result == 'undo':
-            output_error_mess()
             continue
         elif result == 'stop':
             return

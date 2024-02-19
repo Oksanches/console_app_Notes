@@ -49,7 +49,8 @@ path = create_path()
 
 
 diction_menu = {'main': ['add', 'view', 'open', 'del', 'edit', 'search', 'convert'],
-                'prior': ['1', '2', 'undo']}
+                'prior': ['1', '2', 'undo'],
+                'edit': ['name', 'disc', 'prior']}
 
 
 diction_com = {'add': 'Создать заметку',
@@ -65,6 +66,10 @@ diction_com = {'add': 'Создать заметку',
                'stop': '',
                '1': 'Обычная заметка',
                '2': 'Важная заметка',
-               'undo': 'Отменить команду'}
+               'undo': 'Отменить команду',
+               'name': 'Наименование заметки',
+               'disc': 'Содержание заметки',
+               'prior': 'Важность'}
+
 
 
