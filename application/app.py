@@ -15,7 +15,13 @@ def main_loop():
     while True:
         com = pars_com(get_com())
 
-        if com == 'stop': return
+        if com == 'stop':
+            return
+
+        if com == 'help':
+            output_menu_com()
+            continue
+
         if not check_com(com, 'main'):
             output_error_mess()
             continue
@@ -25,6 +31,8 @@ def main_loop():
         if result == 'undo':
             output_error_mess()
             continue
-        elif result == 'stop': return
-        elif result == 'None': continue
+        elif result == 'stop':
+            return
+        elif result == 'None':
+            continue
         output_result(result)

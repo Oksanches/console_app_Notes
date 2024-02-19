@@ -12,13 +12,13 @@ def ending_message():
     pass
 
 
-def output_menu_com(type: str = 'main') -> None:
+def output_menu_com(type_menu: str = 'main') -> None:
     """
 
-    :param type:
+    :param type_menu:
     :return:
     """
-    lst = config.diction_menu.get(type)
+    lst = config.diction_menu.get(type_menu)
     menu = []
     for i in range(len(lst)):
         discript = config.diction_com.get(lst[i])
@@ -93,13 +93,20 @@ def run_command(com):
             data.append(buff)
             return create_notes(data)
 
+
         case 'open':
             name_notes = take_data('Введите имя заметки')
-            result = search_notes(name_notes)
-            if not result[0]:
+            if name_notes == 'undo':
+                output_error_mess()
+                return 'undo'
+            elif name_notes == 'stop':
+                return 'stop'
+
+            notes = search_notes(name_notes)
+            if not notes[0]:
                 output_error_mess()
                 return 'None'
-            return format_notes(result)
+            return format_notes(notes)
 
         case 'search':
             pass
@@ -110,15 +117,39 @@ def run_command(com):
             return 'None'
 
         case 'del':
-            pass
+            name_notes = take_data('Введите имя заметки')
+            if name_notes == 'undo':
+                output_error_mess()
+                return 'undo'
+            elif name_notes == 'stop':
+                return 'stop'
+
+            notes = search_notes(name_notes)
+            if not notes[0]:
+                output_error_mess()
+                return 'None'
+            return del_notes(notes)
 
         case 'edit':
-            pass
+            name_notes = take_data('Введите имя заметки')
+            if name_notes == 'undo':
+                output_error_mess()
+                return 'undo'
+            elif name_notes == 'stop':
+                return 'stop'
+
+            notes = search_notes(name_notes)
+            if not notes[0]:
+                output_error_mess()
+                return 'None'
+
+            #Что изменить и на что изменить
+            #вывести в виде меню что изменить и на что изменить, получить команду/результат и обработать
+            #вывести сообщение
+
+            return edit_notes(notes)
 
         case 'convert':
-            pass
-
-        case 'sort':
             pass
 
 

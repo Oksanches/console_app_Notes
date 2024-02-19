@@ -35,3 +35,14 @@ def format_notes(notes):
 
 def check_duplicate(target):
     return False
+
+
+def del_notes(target):
+   container_notes.remove(target)
+   if target in container_notes:
+       return "Заметка не удалена... :с"
+   save()
+   return f"Заметка {target[0]} была удалена"
+
+def edit_notes(target):
+    pass
