@@ -73,6 +73,12 @@ def run_command(com):
                     return 'undo'
                 elif name_notes == 'stop':
                     return 'stop'
+                elif name_notes == '':
+                    output_error_mess("Имя заметки не может быть пустым... Повторите ввод")
+                    continue
+                elif name_notes == ' ':
+                    output_error_mess("Имя заметки не может быть пустым... Повторите ввод")
+                    continue
                 elif check_duplicate(name_notes):
                     output_error_mess("Заметка с таким именем уже сущевствует\n\t\tПовторите ввод")
                     continue
@@ -100,10 +106,15 @@ def run_command(com):
                 return 'undo'
             elif name_notes == 'stop':
                 return 'stop'
+            elif name_notes == ' ':
+                output_error_mess('Такой заметки не существует, повторите ввод...')
+                return 'None'
+                take_data('Введите имя')
+
 
             notes = search_notes(name_notes)
             if not notes[0]:
-                output_error_mess('Такая с таким именем не найдена, действие отменено.')
+                output_error_mess('Заметка с таким именем не найдена, действие отменено.')
                 return 'None'
             return format_notes(notes)
 

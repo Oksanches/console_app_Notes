@@ -23,6 +23,7 @@ def main_loop():
             output_menu_com()
             continue
 
+
         if not check_com(com, 'main'):
             output_error_mess('Такая команда не определена, повторите ввод')
             continue
