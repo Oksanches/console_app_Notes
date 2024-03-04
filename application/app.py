@@ -22,7 +22,12 @@ def main_loop():
         if com == 'help':
             output_menu_com()
             continue
-
+        elif com == '':
+            output_error_mess('Команда с пустой строчкой отсутствует, повторите ввод...')
+            continue
+        elif com == ' ':
+            output_error_mess('Команда с пустой строчкой отсутствует, повторите ввод...')
+            continue
 
         if not check_com(com, 'main'):
             output_error_mess('Такая команда не определена, повторите ввод')

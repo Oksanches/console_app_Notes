@@ -83,21 +83,28 @@ def run_command(com):
                     output_error_mess("Заметка с таким именем уже сущевствует\n\t\tПовторите ввод")
                     continue
                 data.append(name_notes)
-            descript = take_data("Введите содержание")
-            if descript == 'undo':
-                output_error_mess('Действие отменено пользователем')
-                return 'undo'
-            elif descript == 'stop':
-                return 'stop'
-            data.append(descript)
-            buff = set_priority()
-            if buff == 'undo':
-                output_error_mess('Действие отменено пользователем')
-                return 'undo'
-            elif buff == 'stop':
-                return 'stop'
-            data.append(buff)
-            return create_notes(data)
+            while True:
+                descript = take_data("Введите содержание")
+                if descript == 'undo':
+                    output_error_mess('Действие отменено пользователем')
+                    return 'undo'
+                if descript == '':
+                    output_error_mess('Содержание не может быть пустым, повторите попытку...')
+                    continue
+                if descript == ' ':
+                    output_error_mess('Содержание не может содержать просто пробел, попробуйте еще раз!')
+                    continue
+                if descript == 'stop':
+                    return 'stop'
+                data.append(descript)
+                buff = set_priority()
+                if buff == 'undo':
+                    output_error_mess('Действие отменено пользователем')
+                    return 'undo'
+                elif buff == 'stop':
+                    return 'stop'
+                data.append(buff)
+                return create_notes(data)
 
         case 'open':
             name_notes = take_data('Введите имя заметки')
@@ -205,6 +212,10 @@ def take_data(target) -> str:
             return 'undo'
         elif result == 'stop':
             return 'stop'
+        elif result == '':
+            return ''
+        elif result == ' ':
+            return ' '
 
         if '&' in result:
             output_error_mess('Нельзя использовать символ "&"')
